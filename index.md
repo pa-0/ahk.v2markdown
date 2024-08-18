@@ -1,5 +1,5 @@
 ﻿<toc>
-<nav|Home=https://thearkive.github.io/M-ArkDown_ahk2/|Download=https://github.com/TheArkive/M-ArkDown_ahk2/archive/refs/heads/master.zip|Source=https://github.com/TheArkive/M-ArkDown_ahk2>
+<nav|Source=https://github.com/TheArkive/M-ArkDown_ahk2|Download=https://github.com/TheArkive/M-ArkDown_ahk2/archive/refs/heads/master.zip>
 
 # (M)ArkDown Cheatsheet
 

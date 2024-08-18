@@ -115,8 +115,8 @@ make_html(_in_text, options:="", github:=false, final:=true, md_type:="") {
         If RegExMatch(line,ref_link_rgx) ; skip ref-style links and footnotes
             Continue
         
-        If RegExMatch(line,"^<nav")
-            Continue
+        ; If RegExMatch(line,"^<nav")
+            ; Continue
         
         If (final && line = "<toc>") {
             do_toc := True
