@@ -1,5 +1,5 @@
 ﻿<toc>
-<nav|Source=https://github.com/TheArkive/M-ArkDown_ahk2|Download=https://github.com/TheArkive/M-ArkDown_ahk2/archive/refs/heads/master.zip>
+<nav|Source=https://github.com/TheArkive/M-ArkDown_ahk2|Download=https://github.com/TheArkive/M-ArkDown_ahk2/archive/refs/heads/master.zip|Forum Link=https://www.autohotkey.com/boards/viewtopic.php?f=83&t=90150>
 
 # (M)ArkDown Cheatsheet
 
