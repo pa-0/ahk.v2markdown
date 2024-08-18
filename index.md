@@ -5,7 +5,9 @@
 
 This markdown spec has been designed to adhere to the GitHub standard of markdown, except for elements that deal with GitHub specific items, like commits, comments, etc.
 
-A few extensions have also been added for flexibility.
+A few features have been added for flexibility and convenience.
+
+## Inline code and Code Blocks
 
 The `\` character is used to escape any character and translate it to the corresponding HTML entity, ie. `&#[code];`.
 
@@ -29,7 +31,7 @@ This is a code block.
 ```
 ````
 
-Check out the [Basic writing and formatting synatx](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) on GitHub.  I used this page as a reference for how to render the markdown, and most of the content listed on this link should work with this script.
+Check out the [Basic writing and formatting synatx](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) on GitHub.  I used this page as a reference for how to generate the HTML, and most of the content listed on this link should work with this script.
 
 ## Reference-Style Links
 
@@ -199,11 +201,26 @@ Here is a line with 2 blank lines beneath.\
 \
 Next visible line.
 
+## C<c=#F00>o</c><c=#0F0>l</c>o<c=#00F>r</c>ed Text
+
+This is one of the elements that is not compatible with GitHub markdown.
+
+Example:
+
+```
+Here <c=#F08899>is</c> <c=#FF0>some</c> <c=#33D>colored text</c>.
+```
+
+Result:
+
+Here <c=#F08899>is</c> <c=#FF0>some</c> <c=#33D>colored text</c>.
+
 ## Colors
 
 Example:
 
 ```
+`#00F`
 `#FF0000`
 `rgb(0,255,0)`
 `hsl(25, 100%, 50%)`
@@ -211,6 +228,7 @@ Example:
 
 Result:
 
+`#00F`
 `#FF0000`
 `rgb(0,255,0)`
 `hsl(25, 100%, 50%)`
@@ -240,6 +258,9 @@ Here is a checklist:
 Check the included css file to see how you can customize the checkbox.  Search for `input[type="checkbox"]`.
 
 ## Table of Contents and Navigation code
+
+
+<!--debug-->
 
 You can place the `<toc>` and `<nav|...>` tags anywhere in your document.
 
@@ -635,6 +656,74 @@ Result:
 |1                        |2                     |3                    |
 |manual line<br>break     | data2                | data3               |
 | [link](http://test.com) | **bold**  `code`     | *emphasis*          |
+
+## Box
+
+The `<box>...</box>` tag is meant to be like a "custom code block".  If you want to display literal code/markdown then you need to use the escape character `\`.  Other than that, any other markdown and tags covered in this implementation will be processed.  This tag will give you the border of code tags and also display the font as monospace.
+
+The `<box>` tag is not compatible with GitHub markdown.
+
+```
+This is an <box><c=#F00F00>*\*inline\**</c> <c=#0F0>__\_\_box\_\___</c></box> tag with formatting.
+
+<box>
+This *is* a <c=#00F>_\_code\__</c> <c=#880>**\*\*box\*\***</c> block with <c=#FF0>formatting</c>.
+
+Note the opening and closing tags must be on separate lines.
+</box>
+```
+
+Result:
+
+This is an <box><c=#F00F00>*\*inline\**</c> <c=#0F0>__\_\_box\_\___</c></box> tag with formatting.
+
+<box>
+This *is* a <c=#00F>_\_code\__</c> <c=#F80>**\*\*box\*\***</c> block with <c=#FF0>formatting</c>.
+
+Note the opening and closing tags must be on separate lines.
+</box>
+
+## Pretty Print
+
+The `<pp>...</pp>` tag is meant for inline pretty print.  Inline pretty print will not have a border and the text color will not be changed, but the font will be changed to monospace.
+
+To do code block pretty print, simply add `pp` after the opening of the code block.
+
+````
+This is <pp>inline(pretty,print)</pp>.
+
+```pp
+; This is pretty print in a code block.
+
+class test {
+    prop := value
+    
+    method(a, b) => (a + b)
+    
+    method2(c, d) {
+        return (c / d)
+    }
+}
+```
+````
+
+Result:
+
+This is <pp>inline(pretty,print)</pp>.
+
+```pp
+; This is pretty print in a code block.
+
+class test {
+    prop := value
+    
+    method(a, b) => (a + b)
+    
+    method2(c, d) {
+        return (c / d)
+    }
+}
+```
 
 ## Spoiler
 
