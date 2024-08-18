@@ -5,6 +5,7 @@
     --link-special: orange;
     --link-visited: #006bcf;
     --text: #999;
+    --code-txt: #DDD;
     --header: #00ACAF;
     --border: #00ACAF;
     --blockquote: #0000FF;
@@ -89,7 +90,7 @@ body {
     overflow-y: auto;
     width: 431px;
     /* height: initial; */
-    height: 800px;
+    height: 928px;
     max-height: calc(100vh - 40px);
     transition-duration: 0.25s;
 }
@@ -107,6 +108,11 @@ body {
     color: cyan;
 }
 
+a, a:link { color: var(--link); }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+a:visited { color: var(--link); }
+a:visited:hover { color: var(--link-hover); }
+
 :target a:visited { color: var(--so4); }
 :target a:visited:hover, :target a:visited:hover .link { color: var(--link-hover); }
 :target.underline { border-color: var(--so4); }
@@ -119,12 +125,8 @@ table.normal tr td { background: var(--bg2); }
 table.normal tr th, table tr td { padding: 5px; }
 table.normal tr:hover td { background: var(--row-HL); }
 
-a, a:link { color: var(--link); }
-a:hover { color: var(--link-hover); text-decoration: underline; }
-a:visited { color: var(--link); }
-
 h1, h2, h3, h4, h5, h6
-{ font-weight:bold; color:var(--header); margin-top: 24px; margin-bottom: 0.5em; }
+{ font-weight:bold; color:var(--header); margin-top: 24px; margin-bottom: 0; }
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
 h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a, h6:hover a
@@ -148,12 +150,16 @@ h5.underline { padding-bottom: 2px; }
 h1 { font-size:1.75em; padding-bottom: 10px;}
 h2 { font-size:1.5em;  padding-bottom: 8px;}
 h3 { font-size:1.30em; padding-bottom: 6px;}
-h4 { font-size:1.15em; padding-bottom: 4px;}
-h5 { font-size:1em;    padding-bottom: 2px;}
+h4 { font-size:1.15em; padding-bottom: 0px;}
+h5 { font-size:1em;    padding-bottom: 0px;}
 h6 { font-size:0.75em; }
 
-em, strong { color: var(--emphasis); }
+/* em, strong { color: var(--emphasis); } */
+
+strong { font-weight: 800; }
+
 del { font-weight: 400; }
+
 hr {
     color: transparent;
     border-top-style: solid;
@@ -177,14 +183,27 @@ pre {
     margin-bottom: 1.5em;
     background-color: var(--b1-5);
     padding: 2px 4px;
-    border: 1px solid var(--so1);
+    border: 1px solid var(--border);
     border-radius: 5px;
     font-family: Consolas;
     font-size: 16px;
 }
 
 code {
+    color: var(--code-txt);
     margin: 0px 3px 0px 0px;
+    padding: 2px 4px;
+    background-color: var(--b1-5);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-family: Consolas;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.box {
+    color: var(--code-txt);
+    margin: 0px 3px 0px 3px;
     padding: 2px 4px;
     background-color: var(--b1-5);
     border: 1px solid var(--border);
@@ -264,12 +283,14 @@ summary { margin-bottom: 16px; }
 </style></head>
 
 <body><div id="toc-container"><div id="toc-icon" align="right">&#9776;</div><div id="toc-contents"><a href="#markdown-cheatsheet"><div class="toc-item">• (M)ArkDown Cheatsheet</div></a>
+<a href="#inline-code-and-code-blocks"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Inline code and Code Blocks</div></a>
 <a href="#reference-style-links"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Reference-Style Links</div></a>
 <a href="#emphasis-italics"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Emphasis (Italics)</div></a>
 <a href="#strong-bold"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Strong (Bold)</div></a>
 <a href="#emphasis-+-strong-italic-+-bold"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Emphasis + Strong (Italic + Bold)</div></a>
 <a href="#bold-+-italics-nesting"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Bold + Italics nesting</div></a>
 <a href="#spacing"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Spacing</div></a>
+<a href="#colored-text"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• C<span style="color:#F00">o</span><span style="color:#0F0">l</span>o<span style="color:#00F">r</span>ed Text</div></a>
 <a href="#colors"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Colors</div></a>
 <a href="#check-lists"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Check lists</div></a>
 <a href="#table-of-contents-and-navigation-code"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Table of Contents and Navigation code</div></a>
@@ -285,6 +306,8 @@ summary { margin-bottom: 16px; }
 <a href="#custom-list-numbering-ordered"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Custom List Numbering (Ordered)</div></a>
 <a href="#custom-list-symbol-unordered"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Custom List Symbol (Unordered)</div></a>
 <a href="#tables"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Tables</div></a>
+<a href="#box"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Box</div></a>
+<a href="#pretty-print"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Pretty Print</div></a>
 <a href="#spoiler"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Spoiler</div></a>
 <a href="#thats-all-folks"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Thats all folks!</div></a>
 <a href="#to-do-list:"><div class="toc-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• To-Do List:</div></a></div></div><div id="body-container"><div id="main">
@@ -293,25 +316,27 @@ summary { margin-bottom: 16px; }
 <p></p>
 <p>This markdown spec has been designed to adhere to the GitHub standard of markdown, except for elements that deal with GitHub specific items, like commits, comments, etc.</p>
 <p></p>
-<p>A few extensions have also been added for flexibility.</p>
+<p>A few features have been added for flexibility and convenience.</p>
 <p></p>
-<p>The <code>&#92;</code> character is used to escape any character and translate it to the corresponding HTML entity, ie. <code>&#38;#&#91;code&#93;;</code>.</p>
+<h2 id="inline-code-and-code-blocks"  class="underline">Inline code and Code Blocks<a href="#inline-code-and-code-blocks"><span class="link">•</span></a></h2>
+<p></p>
+<p>The <code>&#x5C;</code> character is used to escape any character and translate it to the corresponding HTML entity, ie. <code>&#x26;#[code];</code>.</p>
 <p></p>
 <p>So this &#42;text&#42; is not formatted since it has the &#95;backslash&#95; prior to the markup elements.</p>
 <p></p>
-<pre><code>So this &#92;&#42;text&#92;&#42; is not formatted since it has the &#92;&#95;backslash&#92;&#95; prior to the markup elements.</code></pre>
+<pre><code>So this &#x5C;&#x2A;text&#x5C;&#x2A; is not formatted since it has the &#x5C;_backslash&#x5C;_ prior to the markup elements&#x2E;</code></pre>
 <p></p>
 <p>It is not necessary to escape characters when using <code>inline code</code>.</p>
 <p></p>
-<pre><code>It is not necessary to escape characters when using &#96;inline code&#96;.</code></pre>
+<pre><code>It is not necessary to escape characters when using &#x60;inline code&#x60;&#x2E;</code></pre>
 <p></p>
 <p>It is also not necessary to escape characters using code blocks.</p>
 <p></p>
-<pre><code>&#96;&#96;&#96;
-This is a code block.
-&#96;&#96;&#96;</code></pre>
+<pre><code>&#x60;&#x60;&#x60;
+This is a code block&#x2E;
+&#x60;&#x60;&#x60;</code></pre>
 <p></p>
-<p>Check out the <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="" rel="noopener noreferrer">Basic writing and formatting synatx</a> on GitHub.  I used this page as a reference for how to render the markdown, and most of the content listed on this link should work with this script.</p>
+<p>Check out the <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="" rel="noopener noreferrer">Basic writing and formatting synatx</a> on GitHub.  I used this page as a reference for how to generate the HTML, and most of the content listed on this link should work with this script.</p>
 <p></p>
 <h2 id="reference-style-links"  class="underline">Reference-Style Links<a href="#reference-style-links"><span class="link">•</span></a></h2>
 <p></p>
@@ -319,29 +344,29 @@ This is a code block.
 <p></p>
 <p>Create a reference-style link:</p>
 <p></p>
-<pre><code>&#91;name&#93;: link&#95;or&#95;image&#95;link "title"</code></pre>
+<pre><code>[name]&#x3A; link_or_image_link &#x22;title&#x22;</code></pre>
 <p></p>
 <hr style="opacity: 0.25;">
 <p></p>
-<p>Note that there cannot be any whitespace before the <code>&#91;name&#93;</code>.  The <code>title</code> is put in the <em>title attribute</em> of the HTML code.  The <code>title</code> is optional.  At a minimum you must specify a reference <em>name</em>, and the <em>link</em>.</p>
+<p>Note that there cannot be any whitespace before the <code>[name]</code>.  The <code>title</code> is put in the <em>title attribute</em> of the HTML code.  The <code>title</code> is optional.  At a minimum you must specify a reference <em>name</em>, and the <em>link</em>.</p>
 <p></p>
 <p>In this example, the reference links are defined at the bottom of this section, but you will not see them unless you look at the markdown document.  Defining the example reference links looks like this:</p>
 <p></p>
-<pre><code>&#91;ref tag 1&#93;: pic.jpg "test reference&#45;style image"
+<pre><code>[ref tag 1]&#x3A; pic&#x2E;jpg &#x22;test reference&#x2D;style image&#x22;
 
-&#91;google&#93;: https://www.google.com "googly eyes"
+[google]&#x3A; https&#x3A;&#x2F;&#x2F;www&#x2E;google&#x2E;com &#x22;googly eyes&#x22;
 
-&#91;yahoo&#93;: https://www.yahoo.com</code></pre>
+[yahoo]&#x3A; https&#x3A;&#x2F;&#x2F;www&#x2E;yahoo&#x2E;com</code></pre>
 <p></p>
 <hr style="opacity: 0.25;">
 <p></p>
 <p>Example code:</p>
 <p></p>
-<pre><code>&#91;yahoo&#93;
+<pre><code>[yahoo]
 
-&#91;This is the google link&#93;&#91;google&#93; &#40;&#60;&#45; hover here&#41;
+[This is the google link][google] (&#x3C;&#x2D; hover here)
 
-&#33;&#91;optional alt text&#93;&#91;ref tag 1&#93;</code></pre>
+&#x21;[optional alt text][ref tag 1]</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -364,8 +389,8 @@ This is a code block.
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#42;This text has emphasis.&#42;
-&#95;This text also has emphasis.&#95;</code></pre>
+<pre><code>&#x2A;This text has emphasis&#x2E;&#x2A;
+_This text also has emphasis&#x2E;_</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -376,8 +401,8 @@ This is a code block.
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#42;&#42;This text is strong.&#42;&#42;
-&#95;&#95;This text is also strong.&#95;&#95;</code></pre>
+<pre><code>&#x2A;&#x2A;This text is strong&#x2E;&#x2A;&#x2A;
+__This text is also strong&#x2E;__</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -388,8 +413,8 @@ This is a code block.
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#42;&#42;&#42;This text has strong + emphasis.&#42;&#42;&#42;
-&#95;&#95;&#95;This text has strong + emphasis.&#95;&#95;&#95;</code></pre>
+<pre><code>&#x2A;&#x2A;&#x2A;This text has strong &#x2B; emphasis&#x2E;&#x2A;&#x2A;&#x2A;
+___This text has strong &#x2B; emphasis&#x2E;___</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -400,7 +425,7 @@ This is a code block.
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>You can &#42;also &#42;&#42;nest&#42;&#42;&#42; the code &#42;&#42;in a &#42;variety&#42;&#42;&#42; of different ways.</code></pre>
+<pre><code>You can &#x2A;also &#x2A;&#x2A;nest&#x2A;&#x2A;&#x2A; the code &#x2A;&#x2A;in a &#x2A;variety&#x2A;&#x2A;&#x2A; of different ways&#x2E;</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -408,18 +433,18 @@ This is a code block.
 <p></p>
 <hr style="opacity: 0.25;">
 <p></p>
-<p>And don't forget that starting a line with <code>&#42;&#42;&#42;</code> or <code>&#95;&#95;&#95;</code> expects to end with a corresponding <code>&#42;&#42;&#42;</code> or <code>&#95;&#95;&#95;</code>.</p>
+<p>And don't forget that starting a line with <code>&#x2A;&#x2A;&#x2A;</code> or <code>___</code> expects to end with a corresponding <code>&#x2A;&#x2A;&#x2A;</code> or <code>___</code>.</p>
 <p></p>
-<p>When nesting, it generally helps for readability to alternate between using <code>&#42;</code> and <code>&#95;</code>, rather than using, ie. <code>&#42;</code> and <code>&#42;&#42;</code>, or <code>&#95;</code> and <code>&#95;&#95;</code>.</p>
+<p>When nesting, it generally helps for readability to alternate between using <code>&#x2A;</code> and <code>_</code>, rather than using, ie. <code>&#x2A;</code> and <code>&#x2A;&#x2A;</code>, or <code>_</code> and <code>__</code>.</p>
 <p></p>
 <h2 id="spacing"  class="underline">Spacing<a href="#spacing"><span class="link">•</span></a></h2>
 <p></p>
-<p>As with regular markdown, spacing is mostly automatic.  If you want to use manual line breaks use the backslash <code>&#92;</code>.</p>
+<p>As with regular markdown, spacing is mostly automatic.  If you want to use manual line breaks use the backslash <code>&#x5C;</code>.</p>
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>Testing a manual line&#92;
-break.</code></pre>
+<pre><code>Testing a manual line&#x5C;
+break&#x2E;</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -427,12 +452,12 @@ break.</code></pre>
 <p></p>
 <hr style="opacity: 0.25;">
 <p></p>
-<p>And without the backslash <code>&#92;</code> ...</p>
+<p>And without the backslash <code>&#x5C;</code> ...</p>
 <p></p>
 <p>Example:</p>
 <p></p>
 <pre><code>Testing a manual line
-break &#40;no backslash&#41;.</code></pre>
+break (no backslash)&#x2E;</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -445,25 +470,39 @@ break &#40;no backslash&#41;.</code></pre>
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>Here is a line with 2 blank lines beneath.&#92;
-&#92;
-&#92;
-Next visible line.</code></pre>
+<pre><code>Here is a line with 2 blank lines beneath&#x2E;&#x5C;
+&#x5C;
+&#x5C;
+Next visible line&#x2E;</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
 <p>Here is a line with 2 blank lines beneath.<br><br><br>Next visible line.</p>
 <p></p>
+<h2 id="colored-text"  class="underline">C<span style="color:#F00">o</span><span style="color:#0F0">l</span>o<span style="color:#00F">r</span>ed Text<a href="#colored-text"><span class="link">•</span></a></h2>
+<p></p>
+<p>This is one of the elements that is not compatible with GitHub markdown.</p>
+<p></p>
+<p>Example:</p>
+<p></p>
+<pre><code>Here &#x3C;c&#x3D;#F08899&#x3E;is&#x3C;&#x2F;c&#x3E; &#x3C;c&#x3D;#FF0&#x3E;some&#x3C;&#x2F;c&#x3E; &#x3C;c&#x3D;#33D&#x3E;colored text&#x3C;&#x2F;c&#x3E;&#x2E;</code></pre>
+<p></p>
+<p>Result:</p>
+<p></p>
+<p>Here <span style="color:#F08899">is</span> <span style="color:#FF0">some</span> <span style="color:#33D">colored text</span>.</p>
+<p></p>
 <h2 id="colors"  class="underline">Colors<a href="#colors"><span class="link">•</span></a></h2>
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#96;#FF0000&#96;
-&#96;rgb&#40;0,255,0&#41;&#96;
-&#96;hsl&#40;25, 100%, 50%&#41;&#96;</code></pre>
+<pre><code>&#x60;#00F&#x60;
+&#x60;#FF0000&#x60;
+&#x60;rgb(0&#x2C;255&#x2C;0)&#x60;
+&#x60;hsl(25&#x2C; 100%&#x2C; 50%)&#x60;</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
+<p><code>#00F <span class="circle" style="background-color: #00F; width: 8px; height: 8px; display: inline-block; border: 2px solid #00F; border-radius: 50%;"></span></code></p>
 <p><code>#FF0000 <span class="circle" style="background-color: #FF0000; width: 8px; height: 8px; display: inline-block; border: 2px solid #FF0000; border-radius: 50%;"></span></code></p>
 <p><code>rgb(0,255,0) <span class="circle" style="background-color: rgb(0,255,0); width: 8px; height: 8px; display: inline-block; border: 2px solid rgb(0,255,0); border-radius: 50%;"></span></code></p>
 <p><code>hsl(25, 100%, 50%) <span class="circle" style="background-color: hsl(25, 100%, 50%); width: 8px; height: 8px; display: inline-block; border: 2px solid hsl(25, 100%, 50%); border-radius: 50%;"></span></code></p>
@@ -472,11 +511,11 @@ Next visible line.</code></pre>
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>Here is a checklist:
-&#45; &#91;x&#93; Checked item
-&#45; &#91; &#93; Unchecked item
-&#45; &#91;x&#93; Checked item
-&#45; &#91; &#93; Unchecked item</code></pre>
+<pre><code>Here is a checklist&#x3A;
+&#x2D; [x] Checked item
+&#x2D; [ ] Unchecked item
+&#x2D; [x] Checked item
+&#x2D; [ ] Unchecked item</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -488,16 +527,19 @@ Next visible line.</code></pre>
 <li><input type="checkbox" id="check3" disabled="" ><label for="check3">  Unchecked item</label></li></ul>
 <hr style="opacity: 0.25;">
 <p></p>
-<p>Check the included css file to see how you can customize the checkbox.  Search for <code>input&#91;type&#61;"checkbox"&#93;</code>.</p>
+<p>Check the included css file to see how you can customize the checkbox.  Search for <code>input[type&#x3D;&#x22;checkbox&#x22;]</code>.</p>
 <p></p>
 <h2 id="table-of-contents-and-navigation-code"  class="underline">Table of Contents and Navigation code<a href="#table-of-contents-and-navigation-code"><span class="link">•</span></a></h2>
 <p></p>
-<p>You can place the <code>&#60;toc&#62;</code> and <code>&#60;nav|...&#62;</code> tags anywhere in your document.</p>
+<p></p>
+<p><!--debug--></p>
+<p></p>
+<p>You can place the <code>&#x3C;toc&#x3E;</code> and <code>&#x3C;nav&#x7C;&#x2E;&#x2E;&#x2E;&#x3E;</code> tags anywhere in your document.</p>
 <p></p>
 <p>Example Code:</p>
 <p></p>
-<pre><code>&#60;toc&#62;
-&#60;nav|asdf1&#61;www.google.com|asdf2&#61;www.yahoo.com&#62;</code></pre>
+<pre><code>&#x3C;toc&#x3E;
+&#x3C;nav&#x7C;asdf1&#x3D;www&#x2E;google&#x2E;com&#x7C;asdf2&#x3D;www&#x2E;yahoo&#x2E;com&#x3E;</code></pre>
 <p></p>
 <p>You can see the toc and nav icon in the top right: <code>☰</code></p>
 <p></p>
@@ -505,23 +547,23 @@ Next visible line.</code></pre>
 <p></p>
 <h2 id="heading-code"  class="underline">Heading code<a href="#heading-code"><span class="link">•</span></a></h2>
 <p></p>
-<p>Headings, with or without underline.  If you want automatic underline for h1 and h2 without adding <code>&#91;underline&#93;</code> tag, just change the css (usually setting border-bottom property is best).</p>
+<p>Headings, with or without underline.  If you want automatic underline for h1 and h2 without adding <code>[underline]</code> tag, just change the css (usually setting border-bottom property is best).</p>
 <p></p>
-<p>For consistency with the <code>&#91;underline&#93;</code> tag, if you want to show brackets (<code>&#91;&#93;</code>) then use the <code>&#92;</code> to escape them.  Escaping brackets will still be compatible with GitHub markdown.</p>
+<p>For consistency with the <code>[underline]</code> tag, if you want to show brackets (<code>[]</code>) then use the <code>&#x5C;</code> to escape them.  Escaping brackets will still be compatible with GitHub markdown.</p>
 <p></p>
-<p>Note that the <code>&#91;underline&#93;</code> tag is not compatible with GitHub markdown.</p>
+<p>Note that the <code>[underline]</code> tag is not compatible with GitHub markdown.</p>
 <p></p>
 <p>Example Code:</p>
 <p></p>
-<pre><code>#### &#92;&#91;Heading 4&#92;&#93;
-##### Heading 5&#91;underline&#93;
-###### Heading &#60;6&#62;
+<pre><code>#### &#x5C;[Heading 4&#x5C;]
+##### Heading 5[underline]
+###### Heading &#x3C;6&#x3E;
 
-Alt H1 &#40;one or more '&#61;' below&#41;
-&#61;
+Alt H1 (one or more &#x27;&#x3D;&#x27; below)
+&#x3D;
 
-Alt H2 &#40;one or more '&#45;' below&#41;
-&#45;</code></pre>
+Alt H2 (one or more &#x27;&#x2D;&#x27; below)
+&#x2D;</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -541,9 +583,9 @@ Alt H2 &#40;one or more '&#45;' below&#41;
 <p></p>
 <p>Example Code:</p>
 <p></p>
-<pre><code>&#62; This is testing a blockquote.
-&#62;
-&#62; &#91;Google link&#93;&#40;https://www.google.com&#41; / &#91;Yahoo link&#93;&#40;https://www.yahoo.com&#41;</code></pre>
+<pre><code>&#x3E; This is testing a blockquote&#x2E;
+&#x3E;
+&#x3E; [Google link](https&#x3A;&#x2F;&#x2F;www&#x2E;google&#x2E;com) &#x2F; [Yahoo link](https&#x3A;&#x2F;&#x2F;www&#x2E;yahoo&#x2E;com)</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -557,10 +599,10 @@ Alt H2 &#40;one or more '&#45;' below&#41;
 <h2 id="images"  class="underline">Images<a href="#images"><span class="link">•</span></a></h2>
 <p></p>
 <p>Example:</p>
-<pre><code>&#91;&#33;&#91;Label 1&#93;&#40;pic.jpg&#41;&#40;width&#61;200&#41;&#93;&#40;https://www.google.com&#41;  &#33;&#91;Label 2&#93;&#40;pic.jpg&#41;&#40;height&#61;200&#41;
+<pre><code>[&#x21;[Label 1](pic&#x2E;jpg)(width&#x3D;200)](https&#x3A;&#x2F;&#x2F;www&#x2E;google&#x2E;com)  &#x21;[Label 2](pic&#x2E;jpg)(height&#x3D;200)
 
-Third pic &#40;using reference&#45;style link&#41;:&#92;
-&#33;&#91;Label 3&#93;&#91;ref tag 1&#93;</code></pre>
+Third pic (using reference&#x2D;style link)&#x3A;&#x5C;
+&#x21;[Label 3][ref tag 1]</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -580,33 +622,33 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <h2 id="horizontal-rule-&#60;hr&#62;"  class="underline">Horizontal Rule &#60;hr&#62;<a href="#horizontal-rule-&#60;hr&#62;"><span class="link">•</span></a></h2>
 <p></p>
-<p>Just like regular markdown, the <code>&#60;hr&#62;</code> can be added by <code>&#45;&#45;&#45;</code>, <code>&#95;&#95;&#95;</code>, and <code>&#42;&#42;&#42;</code> (according to the GitHub spec).  In my version of markdown you can also use <code>&#61;&#61;&#61;</code>.</p>
+<p>Just like regular markdown, the <code>&#x3C;hr&#x3E;</code> can be added by <code>&#x2D;&#x2D;&#x2D;</code>, <code>___</code>, and <code>&#x2A;&#x2A;&#x2A;</code> (according to the GitHub spec).  In my version of markdown you can also use <code>&#x3D;&#x3D;&#x3D;</code>.</p>
 <p></p>
-<p>Another extra feature, not supported in GitHub, is the ability to define the style of the <code>&#60;hr&#62;</code> with an extra <code>&#91;style tag&#93;</code>.  Note that each individual style must NOT have spaces, meaning the <code>opacity:0.5</code> must be typed without spaces within the <code>&#91;style tag&#93;</code>.  Other styles not listed here can also be added and will function normally, as long as the style is separated by a space and contain no spaces.</p>
+<p>Another extra feature, not supported in GitHub, is the ability to define the style of the <code>&#x3C;hr&#x3E;</code> with an extra <code>[style tag]</code>.  Note that each individual style must NOT have spaces, meaning the <code>opacity&#x3A;0&#x2E;5</code> must be typed without spaces within the <code>[style tag]</code>.  Other styles not listed here can also be added and will function normally, as long as the style is separated by a space and contain no spaces.</p>
 <p></p>
 <hr style="opacity: 0.25;">
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#45;&#45;&#45;
+<pre><code>&#x2D;&#x2D;&#x2D;
 
-&#95;&#95;&#95;
+___
 
-&#42;&#42;&#42;
+&#x2A;&#x2A;&#x2A;
 
-&#45;&#45;&#45;&#91;red solid&#93;
+&#x2D;&#x2D;&#x2D;[red solid]
 
-&#45;&#45;&#45;&#91;2px red dashed opacity:0.25&#93;
+&#x2D;&#x2D;&#x2D;[2px red dashed opacity&#x3A;0&#x2E;25]
 
-&#61;&#61;&#61;&#91;4px dashed blue&#93;
+&#x3D;&#x3D;&#x3D;[4px dashed blue]
 
-&#42;&#42;&#42;&#91;4px double pink opacity:0.5&#93;</code></pre>
+&#x2A;&#x2A;&#x2A;[4px double pink opacity&#x3A;0&#x2E;5]</code></pre>
 <p></p>
 <hr style="opacity: 0.25;">
 <p></p>
 <p>Result:</p>
 <p></p>
-<p><details><summary class="spoiler">Click to see &lt;hr&gt;</summary><p>The first 3 are the default without a <code>&#91;tag&#93;</code>.</p>
+<p><details><summary class="spoiler">Click to see &lt;hr&gt;</summary><p>The first 3 are the default without a <code>[tag]</code>.</p>
 <p></p>
 <hr style="opacity: 0.25;">
 <p></p>
@@ -628,7 +670,7 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <p>Please note, that in order to show a <strong>double</strong> line you must specify a style width of at least 3px or greater to actually see both lines.</p>
 <p></p>
-<p>Also, in the GitHub spec, you don't make a <code>&#60;hr&#62;</code> with <code>&#61;&#61;&#61;</code>, unless you are making an h1 Header (see Header section).</p>
+<p>Also, in the GitHub spec, you don't make a <code>&#x3C;hr&#x3E;</code> with <code>&#x3D;&#x3D;&#x3D;</code>, unless you are making an h1 Header (see Header section).</p>
 <p></p>
 <h2 id="lists"  class="underline">Lists<a href="#lists"><span class="link">•</span></a></h2>
 <p></p>
@@ -636,17 +678,17 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <p>Ordered lists use only numbers, but you can set the format to one of the following formats:</p>
 <p></p>
-<table class="normal"><tr></tr><tr><th align="left">Symbol</th><th align="left">Type</th></tr><tr><td align="center"><code>A, a</code></td><td align="left">alphabetical numbering</td></tr><tr><td align="center"><code>I, i</code></td><td align="left">Roman numeral numbering</td></tr><tr><td align="center"><code>1</code></td><td align="left">normal Arabic numbering</td></tr></table>
+<table class="normal"><tr></tr><tr><th align="left">Symbol</th><th align="left">Type</th></tr><tr><td align="center"><code>A&#x2C; a</code></td><td align="left">alphabetical numbering</td></tr><tr><td align="center"><code>I&#x2C; i</code></td><td align="left">Roman numeral numbering</td></tr><tr><td align="center"><code>1</code></td><td align="left">normal Arabic numbering</td></tr></table>
 <p>By default, an ordered list is numbered with Arabic numbers (the numbers you are used to looking at).</p>
 <p></p>
-<p>Unordered lists use <code>&#42;</code>, <code>&#45;</code>, or <code>+</code>.</p>
+<p>Unordered lists use <code>&#x2A;</code>, <code>&#x2D;</code>, or <code>&#x2B;</code>.</p>
 <p></p>
 <ul>
 <li>This is an</li>
 <li>unordered list.</li>
 </ul>
 <p></p>
-<p>Ordered lists use <code>1.</code> or <code>1&#41;</code>.</p>
+<p>Ordered lists use <code>1&#x2E;</code> or <code>1)</code>.</p>
 <p></p>
 <ol type="1">
 <li>This is an</li>
@@ -659,11 +701,11 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>    1. Item 1
-    2. Item 2
+<pre><code>    1&#x2E; Item 1
+    2&#x2E; Item 2
 
-&#45; Item 1
-&#45; Item 2</code></pre>
+&#x2D; Item 1
+&#x2D; Item 2</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -687,9 +729,9 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>1. Item 1
-2. Item 2
-4. Item 3</code></pre>
+<pre><code>1&#x2E; Item 1
+2&#x2E; Item 2
+4&#x2E; Item 3</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -709,10 +751,10 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#45; Item 1
-&#45; Item 2
-+ Item 3
-+ Item 4</code></pre>
+<pre><code>&#x2D; Item 1
+&#x2D; Item 2
+&#x2B; Item 3
+&#x2B; Item 4</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -734,14 +776,14 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#45; Item 1
-  &#45; Item 2
+<pre><code>&#x2D; Item 1
+  &#x2D; Item 2
 
-1. Item 1
-   1. Item 2
+1&#x2E; Item 1
+   1&#x2E; Item 2
 
-&#42; Item 1        &#40;you can indent a full 4 spaces
-    &#42; Item 2    and go past the item text from the previous line&#41;</code></pre>
+&#x2A; Item 1        (you can indent a full 4 spaces
+    &#x2A; Item 2    and go past the item text from the previous line)</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -767,21 +809,21 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <h3 id="custom-list-numbering-ordered" >Custom List Numbering (Ordered)<a href="#custom-list-numbering-ordered"><span class="link">•</span></a></h3>
 <p></p>
-<p>For ordered lists, you can define custom list types by specifying <code>&#91;type&#61;?&#93;</code> on the first line of the list, where <code>?</code> is <code>1</code>, <code>A</code>, <code>a</code>, <code>I</code>, or <code>i</code>.  Make sure to not put spaces around the equal sign (<code>&#61;</code>).</p>
+<p>For ordered lists, you can define custom list types by specifying <code>[type&#x3D;&#x3F;]</code> on the first line of the list, where <code>&#x3F;</code> is <code>1</code>, <code>A</code>, <code>a</code>, <code>I</code>, or <code>i</code>.  Make sure to not put spaces around the equal sign (<code>&#x3D;</code>).</p>
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>1. Item 1&#91;type&#61;I&#93;
-2. Item 2
-3. Item 3
-    &#45; Item 4
-    &#45; Item 5
-    &#45; Item 6
-        1. Item 7&#91;type&#61;A&#93;
-        2. Item 8
-        3. Item 9
-4. Item 10
-5. Item 11</code></pre>
+<pre><code>1&#x2E; Item 1[type&#x3D;I]
+2&#x2E; Item 2
+3&#x2E; Item 3
+    &#x2D; Item 4
+    &#x2D; Item 5
+    &#x2D; Item 6
+        1&#x2E; Item 7[type&#x3D;A]
+        2&#x2E; Item 8
+        3&#x2E; Item 9
+4&#x2E; Item 10
+5&#x2E; Item 11</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -805,27 +847,27 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <p>Note that the default numbering format for this script, and GitHub is as follows:</p>
 <p></p>
-<pre><code>1. Item 1                   &#40;type &#61; 1&#41;  Level 1
-    i. Item 2               &#40;type &#61; i&#41;  Level 2
-        a. Item 3           &#40;type &#61; a&#41;  Level 3 and beyond ...
-            ...             Type I and A &#40;upper case&#41; are not used by default</code></pre>
+<pre><code>1&#x2E; Item 1                   (type &#x3D; 1)  Level 1
+    i&#x2E; Item 2               (type &#x3D; i)  Level 2
+        a&#x2E; Item 3           (type &#x3D; a)  Level 3 and beyond &#x2E;&#x2E;&#x2E;
+            &#x2E;&#x2E;&#x2E;             Type I and A (upper case) are not used by default</code></pre>
 <p></p>
-<p>This is not copatible with GitHub markdown.  For consistency, if you want to use <code>&#91;</code> and <code>&#93;</code> in your list items, escape them with <code>&#92;</code>, ie. <code>&#92;&#91;</code> and <code>&#92;&#93;</code>.</p>
+<p>This is not copatible with GitHub markdown.  For consistency, if you want to use <code>[</code> and <code>]</code> in your list items, escape them with <code>&#x5C;</code>, ie. <code>&#x5C;[</code> and <code>&#x5C;]</code>.</p>
 <p></p>
 <hr style="opacity: 0.25;">
 <p></p>
 <h3 id="custom-list-symbol-unordered" >Custom List Symbol (Unordered)<a href="#custom-list-symbol-unordered"><span class="link">•</span></a></h3>
 <p></p>
-<p>For unordered lists you can define custom bullet symbols by specifying <code>&#91;type&#61;?&#93;</code> on the first line of the list, where <code>?</code> is <code>disc</code>, <code>circle</code>, <code>square</code>, or <code>none</code>.</p>
+<p>For unordered lists you can define custom bullet symbols by specifying <code>[type&#x3D;&#x3F;]</code> on the first line of the list, where <code>&#x3F;</code> is <code>disc</code>, <code>circle</code>, <code>square</code>, or <code>none</code>.</p>
 <p></p>
 <p>Type <code>none</code> is useful if you want to use custom symbols (ie. emojis - ✅).</p>
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#45; item 1 &#40;disc&#41; &#91;type&#61;disc&#93;
-    &#45; item 2 &#40;circle&#41; &#91;type&#61;circle&#93;
-        &#45; item 3 &#40;square&#41; &#91;type&#61;square&#93;
-            &#45; ✅ item 4 &#40;none&#41; &#91;type&#61;none&#93;</code></pre>
+<pre><code>&#x2D; item 1 (disc) [type&#x3D;disc]
+    &#x2D; item 2 (circle) [type&#x3D;circle]
+        &#x2D; item 3 (square) [type&#x3D;square]
+            &#x2D; ✅ item 4 (none) [type&#x3D;none]</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -841,20 +883,20 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <p>Note that the default symbols for unordered lists are as follows:</p>
 <p></p>
-<pre><code>&#45; item 1            &#40;type &#61; disc&#41;   Level 1
-    &#45; item 2        &#40;type &#61; circle&#41; Level 2
-        &#45; item 3    &#40;type &#61; square&#41; Level 3 and beyond ...
-            ...</code></pre>
+<pre><code>&#x2D; item 1            (type &#x3D; disc)   Level 1
+    &#x2D; item 2        (type &#x3D; circle) Level 2
+        &#x2D; item 3    (type &#x3D; square) Level 3 and beyond &#x2E;&#x2E;&#x2E;
+            &#x2E;&#x2E;&#x2E;</code></pre>
 <p></p>
-<p>This is not copatible with GitHub markdown.  For consistency, if you want to use <code>&#91;</code> and <code>&#93;</code> in your list items, escape them with <code>&#92;</code>, ie. <code>&#92;&#91;</code> and <code>&#92;&#93;</code>.</p>
+<p>This is not copatible with GitHub markdown.  For consistency, if you want to use <code>[</code> and <code>]</code> in your list items, escape them with <code>&#x5C;</code>, ie. <code>&#x5C;[</code> and <code>&#x5C;]</code>.</p>
 <p></p>
 <h2 id="tables"  class="underline">Tables<a href="#tables"><span class="link">•</span></a></h2>
 <p></p>
 <p>Tables are the same as GitHub markdown except you can set the alignment of the headers and data separately.</p>
 <p></p>
-<p>Like markdown you use the colon <code>:</code> to determine alignment: <code>right:</code> , <code>:center:</code> , and <code>:left</code> or <code>left</code> (no colon).</p>
+<p>Like markdown you use the colon <code>&#x3A;</code> to determine alignment: <code>right&#x3A;</code> , <code>&#x3A;center&#x3A;</code> , and <code>&#x3A;left</code> or <code>left</code> (no colon).</p>
 <p></p>
-<p>If you want to use a literal colon in a header you must escape it with backslash: <code>&#92;:</code>.  Eescaping the <code>:</code> is compatible with GitHub.</p>
+<p>If you want to use a literal colon in a header you must escape it with backslash: <code>&#x5C;&#x3A;</code>.  Eescaping the <code>&#x3A;</code> is compatible with GitHub.</p>
 <p></p>
 <p>If you don't specify alignment for column headers, then they will use the alignment specified in the 2nd row, and if no alignment is specified, then the default center alignment will be used for column headers, just like GitHub markdown.</p>
 <p></p>
@@ -862,25 +904,87 @@ Third pic &#40;using reference&#45;style link&#41;:&#92;
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>|               &#42;right&#92;:&#42;:| &#126;&#126;left&#126;&#126;             |      center&#92;:       |
-|&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;|&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;:|:&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;:|
-|aaaaaaaaaaaaaaaaaaaa     |bbbbbbbbbbbbbbbbbbbbbb|ccccccccccccccccccccc|
-|1                        |2                     |3                    |
-|manual line&#60;br&#62;break     | data2                | data3               |
-| &#91;link&#93;&#40;http://test.com&#41; | &#42;&#42;bold&#42;&#42;  &#96;code&#96;     | &#42;emphasis&#42;          |
+<pre><code>&#x7C;               &#x2A;right&#x5C;&#x3A;&#x2A;&#x3A;&#x7C; &#x7E;&#x7E;left&#x7E;&#x7E;             &#x7C;      center&#x5C;&#x3A;       &#x7C;
+&#x7C;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x7C;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x3A;&#x7C;&#x3A;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x2D;&#x3A;&#x7C;
+&#x7C;aaaaaaaaaaaaaaaaaaaa     &#x7C;bbbbbbbbbbbbbbbbbbbbbb&#x7C;ccccccccccccccccccccc&#x7C;
+&#x7C;1                        &#x7C;2                     &#x7C;3                    &#x7C;
+&#x7C;manual line&#x3C;br&#x3E;break     &#x7C; data2                &#x7C; data3               &#x7C;
+&#x7C; [link](http&#x3A;&#x2F;&#x2F;test&#x2E;com) &#x7C; &#x2A;&#x2A;bold&#x2A;&#x2A;  &#x60;code&#x60;     &#x7C; &#x2A;emphasis&#x2A;          &#x7C;
 
-The table/columns do not have to be perfectly spaced as shown above.</code></pre>
+The table&#x2F;columns do not have to be perfectly spaced as shown above&#x2E;</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
 <table class="normal"><tr></tr><tr><th align="right"><em>right&#58;</em></th><th align="left"><del>left</del></th><th align="center">center&#58;</th></tr><tr><td align="left">aaaaaaaaaaaaaaaaaaaa</td><td align="right">bbbbbbbbbbbbbbbbbbbbbb</td><td align="center">ccccccccccccccccccccc</td></tr><tr><td align="left">1</td><td align="right">2</td><td align="center">3</td></tr><tr><td align="left">manual line<br>break</td><td align="right">data2</td><td align="center">data3</td></tr><tr><td align="left"><a href="http://test.com" target="" rel="noopener noreferrer">link</a></td><td align="right"><strong>bold</strong>  <code>code</code></td><td align="center"><em>emphasis</em></td></tr></table>
+<h2 id="box"  class="underline">Box<a href="#box"><span class="link">•</span></a></h2>
+<p></p>
+<p>The <code>&#x3C;box&#x3E;&#x2E;&#x2E;&#x2E;&#x3C;&#x2F;box&#x3E;</code> tag is meant to be like a "custom code block".  If you want to display literal code/markdown then you need to use the escape character <code>&#x5C;</code>.  Other than that, any other markdown and tags covered in this implementation will be processed.  This tag will give you the border of code tags and also display the font as monospace.</p>
+<p></p>
+<p>The <code>&#x3C;box&#x3E;</code> tag is not compatible with GitHub markdown.</p>
+<p></p>
+<pre><code>This is an &#x3C;box&#x3E;&#x3C;c&#x3D;#F00F00&#x3E;&#x2A;&#x5C;&#x2A;inline&#x5C;&#x2A;&#x2A;&#x3C;&#x2F;c&#x3E; &#x3C;c&#x3D;#0F0&#x3E;__&#x5C;_&#x5C;_box&#x5C;_&#x5C;___&#x3C;&#x2F;c&#x3E;&#x3C;&#x2F;box&#x3E; tag with formatting&#x2E;
+
+&#x3C;box&#x3E;
+This &#x2A;is&#x2A; a &#x3C;c&#x3D;#00F&#x3E;_&#x5C;_code&#x5C;__&#x3C;&#x2F;c&#x3E; &#x3C;c&#x3D;#880&#x3E;&#x2A;&#x2A;&#x5C;&#x2A;&#x5C;&#x2A;box&#x5C;&#x2A;&#x5C;&#x2A;&#x2A;&#x2A;&#x3C;&#x2F;c&#x3E; block with &#x3C;c&#x3D;#FF0&#x3E;formatting&#x3C;&#x2F;c&#x3E;&#x2E;
+
+Note the opening and closing tags must be on separate lines&#x2E;
+&#x3C;&#x2F;box&#x3E;</code></pre>
+<p></p>
+<p>Result:</p>
+<p></p>
+<p>This is an <span class="box"><span style="color:#F00F00"><em>&#42;inline&#42;</em></span> <span style="color:#0F0"><strong>&#95;&#95;box&#95;&#95;</strong></span></span> tag with formatting.</p>
+<p></p>
+<div class="box">This <em>is</em> a <span style="color:#00F"><em>&#95;code&#95;</em></span> <span style="color:#F80"><strong>&#42;&#42;box&#42;&#42;</strong></span> block with <span style="color:#FF0">formatting</span>.
+<br>
+<br>Note the opening and closing tags must be on separate lines.
+<br></box></div>
+<p></box></p>
+<p></p>
+<h2 id="pretty-print"  class="underline">Pretty Print<a href="#pretty-print"><span class="link">•</span></a></h2>
+<p></p>
+<p>The <code>&#x3C;pp&#x3E;&#x2E;&#x2E;&#x2E;&#x3C;&#x2F;pp&#x3E;</code> tag is meant for inline pretty print.  Inline pretty print will not have a border and the text color will not be changed, but the font will be changed to monospace.</p>
+<p></p>
+<p>To do code block pretty print, simply add <code>pp</code> after the opening of the code block.</p>
+<p></p>
+<pre><code>This is &#x3C;pp&#x3E;inline(pretty&#x2C;print)&#x3C;&#x2F;pp&#x3E;&#x2E;
+
+&#x60;&#x60;&#x60;pp
+; This is pretty print in a code block&#x2E;
+
+class test {
+    prop &#x3A;&#x3D; value
+
+    method(a&#x2C; b) &#x3D;&#x3E; (a &#x2B; b)
+
+    method2(c&#x2C; d) {
+        return (c &#x2F; d)
+    }
+}
+&#x60;&#x60;&#x60;</code></pre>
+<p></p>
+<p>Result:</p>
+<p></p>
+<p>This is <span style="font-family: Consolas">inline<span style="color:#60F">(</span>pretty<span style="color:#60F">,</span>print<span style="color:#60F">)</span></span>.</p>
+<p></p>
+<pre><code><span style="color:#080">; This is pretty print in a code block&#x2E;</span>
+
+class test <span style="color:#60F">{</span>
+    prop <span style="color:#06F">&#x3A;&#x3D;</span> value
+
+    method<span style="color:#60F">(</span>a<span style="color:#60F">,</span> b<span style="color:#60F">)</span> <span style="color:#0CF">&#x3D;</span><span style="color:#0CF">&#x3E;</span> <span style="color:#60F">(</span>a <span style="color:#06F">+</span> b<span style="color:#60F">)</span>
+
+    method2<span style="color:#60F">(</span>c<span style="color:#60F">,</span> d<span style="color:#60F">)</span> <span style="color:#60F">{</span>
+        return <span style="color:#60F">(</span>c &#x2F; d<span style="color:#60F">)</span>
+    <span style="color:#60F">}</span>
+<span style="color:#60F">}</span></code></pre>
+<p></p>
 <h2 id="spoiler"  class="underline">Spoiler<a href="#spoiler"><span class="link">•</span></a></h2>
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#60;spoiler&#61;Spoiler Title&#62;
-spoiler content &#96;that&#96; is &#42;also&#42; formatted &#42;&#42;and&#42;&#42; stuff&#33;
-&#60;/spoiler&#62;</code></pre>
+<pre><code>&#x3C;spoiler&#x3D;Spoiler Title&#x3E;
+spoiler content &#x60;that&#x60; is &#x2A;also&#x2A; formatted &#x2A;&#x2A;and&#x2A;&#x2A; stuff&#x21;
+&#x3C;&#x2F;spoiler&#x3E;</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -892,10 +996,10 @@ spoiler content &#96;that&#96; is &#42;also&#42; formatted &#42;&#42;and&#42;&#4
 <p></p>
 <p>Example:</p>
 <p></p>
-<pre><code>&#60;details&#62;
-&#60;summary&#62;Spoiler Title&#60;/summary&#62;
-spoiler content &#96;that&#96; is &#42;also&#42; formatted &#42;&#42;and&#42;&#42; stuff&#33;
-&#60;/details&#62;</code></pre>
+<pre><code>&#x3C;details&#x3E;
+&#x3C;summary&#x3E;Spoiler Title&#x3C;&#x2F;summary&#x3E;
+spoiler content &#x60;that&#x60; is &#x2A;also&#x2A; formatted &#x2A;&#x2A;and&#x2A;&#x2A; stuff&#x21;
+&#x3C;&#x2F;details&#x3E;</code></pre>
 <p></p>
 <p>Result:</p>
 <p></p>
@@ -908,13 +1012,12 @@ spoiler content &#96;that&#96; is &#42;also&#42; formatted &#42;&#42;and&#42;&#4
 <p></p>
 <h2 id="thats-all-folks"  class="underline">Thats all folks!<a href="#thats-all-folks"><span class="link">•</span></a></h2>
 <p></p>
-<p>Please remember, while this version of markdown is compatible with GitHub, the "extra features" are not.  I will mostly be using this for generating fancy offline docs for scripts and libraries, and for generating GibHub Pages resources for my GitHub repos.  Or as an offline means to check what a <code>README.md</code> might look like on GitHub.</p>
+<p>Please remember, while this version of markdown is compatible with GitHub, the "extra features" are not.</p>
 <p></p>
 <h2 id="to-do-list:"  class="underline">To-Do List:<a href="#to-do-list:"><span class="link">•</span></a></h2>
 <p></p>
 <ul>
 <li>Add lots of :emojis: ?</li>
-<li>Clean up ordered and unordered lists parsing. Currently they can't be properly nested, but parsing of ordered and unordered lists separately is working.</li>
 </ul>
 <p></p>
 <p></p></div></div></body></html>
